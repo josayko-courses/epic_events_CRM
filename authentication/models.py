@@ -27,4 +27,13 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.email
+        return f"{self.email} - {self.role}"
+
+    def save(self, *args, **kwargs):
+        """
+        Save the user instance
+        """
+        self.is_staff = True
+        user = super(User, self)
+        user.save()
+        return user

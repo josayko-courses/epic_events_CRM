@@ -24,6 +24,7 @@ class MyUserAdmin(UserAdmin):
         "date_created",
         "date_updated",
         "is_staff",
+        "is_superuser",
         "is_active",
         "id",
     )
@@ -34,6 +35,7 @@ class MyUserAdmin(UserAdmin):
         "date_created",
         "date_updated",
         "is_staff",
+        "is_superuser",
         "is_active",
     )
     readonly_fields = ("id", "date_created", "date_updated")
@@ -53,7 +55,12 @@ class MyUserAdmin(UserAdmin):
                 )
             },
         ),
-        ("Permissions", {"fields": ("is_staff", "is_active")}),
+        (
+            "Permissions",
+            {
+                "fields": ("is_active",),
+            },
+        ),
     )
     add_fieldsets = (
         (
@@ -67,7 +74,6 @@ class MyUserAdmin(UserAdmin):
                     "password1",
                     "password2",
                     "role",
-                    "is_staff",
                     "is_active",
                 ),
             },
