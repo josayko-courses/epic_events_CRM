@@ -33,7 +33,9 @@ class User(AbstractUser):
         """
         Save the user instance
         """
-        self.is_staff = True
+        if self.role == "MANAGEMENT":
+            self.is_staff = True
+            self.is_superuser = True
         user = super(User, self)
         user.save()
         return user
