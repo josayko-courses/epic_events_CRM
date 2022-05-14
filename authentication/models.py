@@ -10,18 +10,19 @@ from authentication.managers import UserManager
 class User(AbstractUser):
     SALES = "SALES"
     SUPPORT = "SUPPORT"
-
+    MANAGEMENT = "MANAGEMENT"
     ROLE_CHOICES = (
         (SALES, "Sales"),
         (SUPPORT, "Support"),
+        (MANAGEMENT, "Management"),
     )
-
-    objects = UserManager()
-
-    email = models.EmailField(unique=True)
-    username = None
     role = models.CharField(max_length=32, choices=ROLE_CHOICES)
+    email = models.EmailField(unique=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
+    username = None
+    objects = UserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 

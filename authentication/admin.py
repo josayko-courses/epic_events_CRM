@@ -8,12 +8,21 @@ class MyUserAdmin(UserAdmin):
     add_form = MyUserCreationForm
     form = MyUserChangeForm
     model = User
-    ordering = ("email", "role", "first_name", "last_name")
+    ordering = (
+        "email",
+        "role",
+        "first_name",
+        "last_name",
+        "date_created",
+        "date_updated",
+    )
     list_display = (
         "email",
         "role",
         "first_name",
         "last_name",
+        "date_created",
+        "date_updated",
         "is_staff",
         "is_active",
         "id",
@@ -22,14 +31,27 @@ class MyUserAdmin(UserAdmin):
         "email",
         "first_name",
         "last_name",
+        "date_created",
+        "date_updated",
         "is_staff",
         "is_active",
     )
-    readonly_fields = ("id",)
+    readonly_fields = ("id", "date_created", "date_updated")
     fieldsets = (
         (
             None,
-            {"fields": ("id", "email", "password", "role", "first_name", "last_name")},
+            {
+                "fields": (
+                    "id",
+                    "email",
+                    "password",
+                    "role",
+                    "first_name",
+                    "last_name",
+                    "date_created",
+                    "date_updated",
+                )
+            },
         ),
         ("Permissions", {"fields": ("is_staff", "is_active")}),
     )
