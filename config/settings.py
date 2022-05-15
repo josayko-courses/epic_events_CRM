@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "authentication",
     "crm",
+    "contracts",
+    "events",
 ]
 
 MIDDLEWARE = [
