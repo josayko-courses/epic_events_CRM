@@ -1,0 +1,41 @@
+[
+  {
+    "model": "crm.Client",
+    "pk": 1,
+    "fields": {
+      "email": "business@microsoft.com",
+      "phone": "0123-4567",
+      "company_name": "Microsoft",
+      "date_created": "2022-05-15T12:57:13.714114Z",
+      "date_updated": "2022-05-15T12:57:13.714127Z",
+      "is_customer": true,
+      "sales_contact": 3
+    }
+  },
+  {
+    "model": "crm.Client",
+    "pk": 2,
+    "fields": {
+      "email": "business@apple.com",
+      "phone": "0987-5432",
+      "company_name": "Apple",
+      "date_created": "2022-05-15T12:57:13.714114Z",
+      "date_updated": "2022-05-15T12:57:13.714127Z",
+      "is_customer": true,
+      "sales_contact": 3
+    }
+  },
+  {
+    "model": "crm.Client",
+    "pk": 3,
+    "fields": {
+      "email": "business@ovhcloud.com",
+      "phone": "9365-0673",
+      "company_name": "OVH Cloud",
+      "date_created": "2022-05-15T12:57:13.714114Z",
+      "date_updated": "2022-05-15T12:57:13.714127Z",
+      "is_customer": false,
+      "sales_contact": 3
+    }
+  }
+]

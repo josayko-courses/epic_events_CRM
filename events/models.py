@@ -3,6 +3,17 @@ from config.settings import AUTH_USER_MODEL
 from contracts.models import Contract
 
 
+class EventStatus(models.Model):
+    description = models.CharField(max_length=64)
+
+    class Meta:
+        verbose_name = "Event Status"
+        verbose_name_plural = "Event Status"
+
+    def __str__(self):
+        return f"{self.description}"
+
+
 class Event(models.Model):
     name = models.CharField(max_length=64)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -19,8 +30,8 @@ class Event(models.Model):
         (OPEN, "Open"),
         (CLOSE, "Close"),
     )
-    status = models.CharField(max_length=32, choices=STATUS_CHOICES)
 
+    status = models.ForeignKey(EventStatus, null=True, on_delete=models.SET_NULL)
     support_contact = models.ForeignKey(
         AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
     )

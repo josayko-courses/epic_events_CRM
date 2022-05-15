@@ -38,13 +38,19 @@ $ make up
 $ python manage.py migrate
 ```
 
-#### Create a superuser for admin dashboard
+#### Create a superuser
 
 ```bash
 $ python manage.py createsuperuser
 ```
 
 > You can access admin dashboard on http://localhost:8000/admin
+
+#### Or provide initial data from `fixtures/` directory
+
+```bash
+$ make fixture
+```
 
 ## Running the app
 

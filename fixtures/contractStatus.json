@@ -1,0 +1,23 @@
+[
+  {
+    "model": "contracts.ContractStatus",
+    "pk": 1,
+    "fields": {
+      "description": "Open"
+    }
+  },
+  {
+    "model": "contracts.ContractStatus",
+    "pk": 2,
+    "fields": {
+      "description": "Close"
+    }
+  },
+  {
+    "model": "contracts.ContractStatus",
+    "pk": 3,
+    "fields": {
+      "description": "Supsended"
+    }
+  }
+]

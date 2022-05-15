@@ -1,0 +1,23 @@
+[
+  {
+    "model": "events.EventStatus",
+    "pk": 1,
+    "fields": {
+      "description": "In Preparation"
+    }
+  },
+  {
+    "model": "events.EventStatus",
+    "pk": 2,
+    "fields": {
+      "description": "Ongoing"
+    }
+  },
+  {
+    "model": "events.EventStatus",
+    "pk": 3,
+    "fields": {
+      "description": "Done"
+    }
+  }
+]
