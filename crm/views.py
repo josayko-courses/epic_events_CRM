@@ -1,7 +1,7 @@
-from rest_framework import status
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import permissions, status
 from rest_framework.response import Response
-from rest_framework import permissions
+from rest_framework.viewsets import ModelViewSet
+
 from crm.models import Client
 from crm.serializers import ClientListSerializer
 

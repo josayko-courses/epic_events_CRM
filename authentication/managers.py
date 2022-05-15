@@ -4,9 +4,7 @@ from django.contrib.auth.base_user import BaseUserManager
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
-            raise TypeError(
-                "TypeError: UserManager.create_user() missing 1 required positional argument: 'email'"
-            )
+            raise TypeError("TypeError: UserManager.create_user() missing 1 required positional argument: 'email'")
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)

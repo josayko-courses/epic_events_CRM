@@ -1,7 +1,7 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 
 from authentication.forms import LoginForm
-from django.contrib.auth import login, authenticate
 
 
 def login_page(request):

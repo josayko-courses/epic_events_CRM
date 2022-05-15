@@ -1,4 +1,5 @@
 from django.db import models
+
 from config.settings import AUTH_USER_MODEL
 
 
@@ -15,6 +16,4 @@ class Client(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
-    sales_contact = models.ForeignKey(
-        AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
-    )
+    sales_contact = models.ForeignKey(AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)

@@ -1,4 +1,4 @@
 [flake8]
 extend-ignore = E402,F401
-exclude = .git,.tox,*/migrations/*
+exclude = .git,.tox,*/migrations/*,env
 max-line-length = 119

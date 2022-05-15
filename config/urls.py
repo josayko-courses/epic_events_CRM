@@ -1,10 +1,12 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
+
 from authentication import views
 
 
 def test(request):
     division = 1 / 0
+    return division
 
 
 urlpatterns = [
