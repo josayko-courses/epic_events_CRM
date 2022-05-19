@@ -1,18 +1,37 @@
-from rest_framework import permissions, status
+from django.core.exceptions import PermissionDenied
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from crm.models import Client
-from crm.serializers import ClientListSerializer
+from crm.serializers import ClientSerializer
 
 
 class ClientViewset(ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ClientSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        """
+        Get all clients
+        """
         return Client.objects.all()
 
-    def list(self, request, *args, **kwargs):
-        clients = Client.objects.all()
-        serializer = ClientListSerializer(clients, many=True)
-        return Response(serializer.data, status.HTTP_200_OK)
+    def perform_create(self, serializer):
+        """
+        Bind sales contact to request user
+        """
+        serializer.save(sales_contact=self.request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def perform_update(self, serializer):
+        """
+        Cannot update a customer back to propspect
+        """
+        client = self.get_object()
+        if client.is_customer is True:
+            if serializer.validated_data.get("is_customer") is False:
+                raise PermissionDenied()
+        serializer.save(sales_contact=self.request.user)
+        return Response(serializer.data)
