@@ -1,6 +1,6 @@
 from django.db import models
 from config.settings import AUTH_USER_MODEL
-from crm.models import Client
+from clients.models import Client
 
 
 class ContractStatus(models.Model):

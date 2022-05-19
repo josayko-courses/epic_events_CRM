@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from crm.models import Client
+from clients.models import Client
 
 admin.site.register(Client)

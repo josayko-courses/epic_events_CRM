@@ -1,6 +1,6 @@
 [
   {
-    "model": "crm.Client",
+    "model": "clients.Client",
     "pk": 1,
     "fields": {
       "email": "business@microsoft.com",
@@ -13,7 +13,7 @@
     }
   },
   {
-    "model": "crm.Client",
+    "model": "clients.Client",
     "pk": 2,
     "fields": {
       "email": "business@apple.com",
@@ -26,7 +26,7 @@
     }
   },
   {
-    "model": "crm.Client",
+    "model": "clients.Client",
     "pk": 3,
     "fields": {
       "email": "business@ovhcloud.com",

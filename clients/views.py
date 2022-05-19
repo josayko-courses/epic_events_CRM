@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from crm.models import Client
-from crm.serializers import ClientSerializer
+from clients.models import Client
+from clients.serializers import ClientSerializer
 
 
 class ClientViewset(ModelViewSet):

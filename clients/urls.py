@@ -1,6 +1,6 @@
 from django.urls import path
 
-from crm.views import ClientViewset
+from clients.views import ClientViewset
 
 urlpatterns = [
     path("", ClientViewset.as_view({"get": "list", "post": "create"})),

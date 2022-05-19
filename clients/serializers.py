@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from crm.models import Client
+from clients.models import Client
 
 
 class ClientSerializer(serializers.ModelSerializer):
