@@ -36,4 +36,4 @@ class ContractViewset(ModelViewSet):
             if serializer.validated_data.get("is_signed") is False:
                 raise PermissionDenied()
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

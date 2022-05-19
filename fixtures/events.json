@@ -1,0 +1,17 @@
+[
+  {
+    "model": "events.Event",
+    "pk": 1,
+    "fields": {
+      "name": "Windows 11 Presentation",
+      "date_created": "2022-05-19T10:42:43.006161Z",
+      "date_updated": "2022-05-19T11:08:53.517227Z",
+      "attendees": 500,
+      "event_date": "2022-07-12T10:42:33Z",
+      "notes": "",
+      "status": 3,
+      "support_contact": 4,
+      "contract": 1
+    }
+  }
+]

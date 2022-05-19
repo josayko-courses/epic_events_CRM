@@ -4,7 +4,7 @@ up:
 	docker-compose -f database/docker-compose.yml up -d
 
 fixture:
-	python manage.py loaddata users clients contractStatus eventStatus contracts
+	python manage.py loaddata users clients contractStatus eventStatus contracts events
 
 psql:
 	docker exec -it dev-postgres psql -U admin

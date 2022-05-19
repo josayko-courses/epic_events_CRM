@@ -22,15 +22,6 @@ class Event(models.Model):
     event_date = models.DateTimeField()
     notes = models.CharField(max_length=256, blank=True)
 
-    NOT_OPEN = "NOT_OPEN"
-    OPEN = "OPEN"
-    CLOSE = "CLOSE"
-    STATUS_CHOICES = (
-        (NOT_OPEN, "Not Open"),
-        (OPEN, "Open"),
-        (CLOSE, "Close"),
-    )
-
     status = models.ForeignKey(EventStatus, null=True, on_delete=models.SET_NULL)
     support_contact = models.ForeignKey(
         AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL

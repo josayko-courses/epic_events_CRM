@@ -34,4 +34,4 @@ class ClientViewset(ModelViewSet):
             if serializer.validated_data.get("is_customer") is False:
                 raise PermissionDenied()
         serializer.save(sales_contact=self.request.user)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

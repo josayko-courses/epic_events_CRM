@@ -6,8 +6,6 @@ urlpatterns = [
     path("", ContractViewset.as_view({"get": "list", "post": "create"})),
     path(
         "<int:pk>/",
-        ContractViewset.as_view(
-            {"get": "retrieve", "put": "update", "delete": "destroy"}
-        ),
+        ContractViewset.as_view({"get": "retrieve", "put": "update"}),
     ),
 ]

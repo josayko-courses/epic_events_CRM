@@ -15,5 +15,6 @@ urlpatterns = [
     path("", views.login_page, name="login"),
     path("clients/", include("clients.urls")),
     path("contracts/", include("contracts.urls")),
+    path("events/", include("events.urls")),
     path("test/", test),
 ]
