@@ -1,4 +1,4 @@
-from django.core.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -32,6 +32,6 @@ class ClientViewset(ModelViewSet):
         client = self.get_object()
         if client.is_customer is True:
             if serializer.validated_data.get("is_customer") is False:
-                raise PermissionDenied()
+                raise PermissionDenied("Cannot update a customer back to prospect")
         serializer.save(sales_contact=self.request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)

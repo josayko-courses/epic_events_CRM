@@ -1,4 +1,4 @@
-from django.core.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -22,20 +22,20 @@ class EventViewset(ModelViewSet):
         """
         Cannot create an event:
         - with a prospect
-        - an inexisting contract
+        - an unknown contract
         - a non-signed contract
         - a contract that already have an event
         """
         if serializer.validated_data.get("contract").client.is_customer is False:
-            raise PermissionDenied()
+            raise PermissionDenied("Cannot create an event with a prospect")
         if serializer.validated_data.get("contract").id is None:
-            raise PermissionDenied()
+            raise PermissionDenied("Cannot create an event with an unknown contract")
         if serializer.validated_data.get("contract").is_signed is False:
-            raise PermissionDenied()
+            raise PermissionDenied("Cannot create an event with a non-signed contract")
         if Event.objects.filter(
             contract=serializer.validated_data.get("contract")
         ).exists():
-            raise PermissionDenied()
+            raise PermissionDenied("An event is already set to this contract")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -47,6 +47,6 @@ class EventViewset(ModelViewSet):
         done_status = EventStatus.objects.get(description="Done")
         if event.status == done_status:
             if serializer.validated_data.get("status") != done_status:
-                raise PermissionDenied()
+                raise PermissionDenied("Cannot update, event is already done")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)

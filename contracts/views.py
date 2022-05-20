@@ -1,4 +1,4 @@
-from django.core.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -23,7 +23,7 @@ class ContractViewset(ModelViewSet):
         Cannot create a contract with a prospect
         """
         if serializer.validated_data.get("client").is_customer is False:
-            raise PermissionDenied()
+            raise PermissionDenied("Cannot create a contract with a prospect")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -34,6 +34,6 @@ class ContractViewset(ModelViewSet):
         contract = self.get_object()
         if contract.is_signed is True:
             if serializer.validated_data.get("is_signed") is False:
-                raise PermissionDenied()
+                raise PermissionDenied("Cannot update a signed contract")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
