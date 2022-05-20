@@ -16,9 +16,7 @@ class Client(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
-    sales_contact = models.ForeignKey(
-        AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
-    )
+    sales_contact = models.ForeignKey(AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.company_name} - {self.email}"

@@ -1,16 +1,17 @@
-from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from authentication.permissions import ClientPermission, isManagement
 from clients.models import Client
 from clients.serializers import ClientSerializer
 
 
 class ClientViewset(ModelViewSet):
     serializer_class = ClientSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isManagement | ClientPermission]
 
     def get_queryset(self):
         """

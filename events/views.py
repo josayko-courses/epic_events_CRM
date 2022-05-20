@@ -1,16 +1,17 @@
-from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from authentication.permissions import EventPermission, isManagement
 from events.models import Event, EventStatus
 from events.serializers import EventSerializer
 
 
 class EventViewset(ModelViewSet):
     serializer_class = EventSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isManagement | EventPermission]
 
     def get_queryset(self):
         """
@@ -32,9 +33,7 @@ class EventViewset(ModelViewSet):
             raise PermissionDenied("Cannot create an event with an unknown contract")
         if serializer.validated_data.get("contract").is_signed is False:
             raise PermissionDenied("Cannot create an event with a non-signed contract")
-        if Event.objects.filter(
-            contract=serializer.validated_data.get("contract")
-        ).exists():
+        if Event.objects.filter(contract=serializer.validated_data.get("contract")).exists():
             raise PermissionDenied("An event is already set to this contract")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

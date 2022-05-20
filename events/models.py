@@ -1,4 +1,5 @@
 from django.db import models
+
 from config.settings import AUTH_USER_MODEL
 from contracts.models import Contract
 
@@ -23,9 +24,7 @@ class Event(models.Model):
     notes = models.CharField(max_length=256, blank=True)
 
     status = models.ForeignKey(EventStatus, null=True, on_delete=models.SET_NULL)
-    support_contact = models.ForeignKey(
-        AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
-    )
+    support_contact = models.ForeignKey(AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     contract = models.ForeignKey(Contract, null=True, on_delete=models.CASCADE)
 
     def __str__(self):

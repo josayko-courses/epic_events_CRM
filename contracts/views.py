@@ -1,16 +1,17 @@
-from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from authentication.permissions import ContractPermission, isManagement
 from contracts.models import Contract
 from contracts.serializers import ContractSerializer
 
 
 class ContractViewset(ModelViewSet):
     serializer_class = ContractSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, isManagement | ContractPermission]
 
     def get_queryset(self):
         """

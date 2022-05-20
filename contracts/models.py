@@ -1,6 +1,7 @@
 from django.db import models
-from config.settings import AUTH_USER_MODEL
+
 from clients.models import Client
+from config.settings import AUTH_USER_MODEL
 
 
 class ContractStatus(models.Model):
@@ -23,9 +24,7 @@ class Contract(models.Model):
     payment_due = models.DateTimeField()
 
     status = models.ForeignKey(ContractStatus, null=True, on_delete=models.SET_NULL)
-    sales_contact = models.ForeignKey(
-        AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
-    )
+    sales_contact = models.ForeignKey(AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     client = models.ForeignKey(Client, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
