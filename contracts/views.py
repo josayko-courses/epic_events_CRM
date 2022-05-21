@@ -1,11 +1,10 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.filters import SearchFilter
-
-from django_filters.rest_framework import DjangoFilterBackend
 
 from authentication.permissions import ContractPermission, isManagement
 from contracts.models import Contract
@@ -43,9 +42,7 @@ class ContractViewset(ModelViewSet):
         if serializer.validated_data.get("client").is_customer is False:
             raise PermissionDenied("Cannot create a contract with a prospect")
         else:
-            serializer.save(
-                sales_contact=serializer.validated_data.get("client").sales_contact
-            )
+            serializer.save(sales_contact=serializer.validated_data.get("client").sales_contact)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def perform_update(self, serializer):

@@ -1,11 +1,10 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.filters import SearchFilter
-
-from django_filters.rest_framework import DjangoFilterBackend
 
 from authentication.permissions import EventPermission, isManagement
 from events.models import Event, EventStatus
@@ -50,9 +49,7 @@ class EventViewset(ModelViewSet):
             raise PermissionDenied("Cannot create an event with an unknown contract")
         if serializer.validated_data.get("contract").is_signed is False:
             raise PermissionDenied("Cannot create an event with a non-signed contract")
-        if Event.objects.filter(
-            contract=serializer.validated_data.get("contract")
-        ).exists():
+        if Event.objects.filter(contract=serializer.validated_data.get("contract")).exists():
             raise PermissionDenied("An event is already set to this contract")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

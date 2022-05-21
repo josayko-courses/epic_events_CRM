@@ -85,10 +85,7 @@ class EventPermission(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
-            return (
-                request.user == obj.contract.sales_contact
-                or request.user == obj.support_contact
-            )
+            return request.user == obj.contract.sales_contact or request.user == obj.support_contact
         else:
             done_status = EventStatus.objects.get(description="Done")
             if obj.status == done_status:
