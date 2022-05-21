@@ -3,6 +3,9 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.filters import SearchFilter
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from authentication.permissions import ContractPermission, isManagement
 from contracts.models import Contract
@@ -12,6 +15,16 @@ from contracts.serializers import ContractSerializer
 class ContractViewset(ModelViewSet):
     serializer_class = ContractSerializer
     permission_classes = [IsAuthenticated, isManagement | ContractPermission]
+
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    # /contracts/?is_signed=false
+    filterset_fields = ["is_signed"]
+    # /contracts/?search=Microsoft
+    search_fields = [
+        "^client__company_name",
+        "^client__last_name",
+        "^client__email",
+    ]
 
     def get_queryset(self):
         """

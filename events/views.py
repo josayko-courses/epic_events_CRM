@@ -3,6 +3,9 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.filters import SearchFilter
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from authentication.permissions import EventPermission, isManagement
 from events.models import Event, EventStatus
@@ -12,6 +15,16 @@ from events.serializers import EventSerializer
 class EventViewset(ModelViewSet):
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticated, isManagement | EventPermission]
+
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    # /events/?status=1
+    filterset_fields = ["status"]
+    # /events/?search=apple
+    search_fields = [
+        "^contract__client__company_name",
+        "^contract__client__last_name",
+        "^contract__client__email",
+    ]
 
     def get_queryset(self):
         """
