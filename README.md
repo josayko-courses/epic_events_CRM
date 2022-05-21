@@ -62,6 +62,8 @@ $ python manage.py runserver
 
 ## Documentation
 
+Postman: https://documenter.getpostman.com/view/19947149/UyxoiPXf
+
 ## Author
 
 - Jonny Saykosy <josayko@pm.me>

@@ -17,7 +17,7 @@
     "model": "authentication.User",
     "pk": 2,
     "fields": {
-      "email": "janesmith@management.org",
+      "email": "test@management.org",
       "first_name": "Jane",
       "last_name": "Smith",
       "password": "pbkdf2_sha256$320000$YLwlROxe2qZ6pM1qq7WypQ$gcpAeKDBekX6VkJYRRYZ5x6PzluRXuFLG50x4ZPmWCs=",
@@ -33,7 +33,7 @@
     "model": "authentication.User",
     "pk": 3,
     "fields": {
-      "email": "johndoe@sales.org",
+      "email": "test@sales.org",
       "first_name": "John",
       "last_name": "Doe",
       "password": "pbkdf2_sha256$320000$YLwlROxe2qZ6pM1qq7WypQ$gcpAeKDBekX6VkJYRRYZ5x6PzluRXuFLG50x4ZPmWCs=",
@@ -49,7 +49,7 @@
     "model": "authentication.User",
     "pk": 4,
     "fields": {
-      "email": "bobbybrown@support.org",
+      "email": "test@support.org",
       "first_name": "Bobby",
       "last_name": "Brown",
       "password": "pbkdf2_sha256$320000$YLwlROxe2qZ6pM1qq7WypQ$gcpAeKDBekX6VkJYRRYZ5x6PzluRXuFLG50x4ZPmWCs=",

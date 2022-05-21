@@ -17,6 +17,10 @@ class EventViewset(ModelViewSet):
         """
         Get all events
         """
+        if self.request.user.role == "SALES":
+            return Event.objects.filter(contract__sales_contact=self.request.user)
+        elif self.request.user.role == "SUPPORT":
+            return Event.objects.filter(support_contact=self.request.user)
         return Event.objects.all()
 
     def perform_create(self, serializer):
@@ -33,7 +37,9 @@ class EventViewset(ModelViewSet):
             raise PermissionDenied("Cannot create an event with an unknown contract")
         if serializer.validated_data.get("contract").is_signed is False:
             raise PermissionDenied("Cannot create an event with a non-signed contract")
-        if Event.objects.filter(contract=serializer.validated_data.get("contract")).exists():
+        if Event.objects.filter(
+            contract=serializer.validated_data.get("contract")
+        ).exists():
             raise PermissionDenied("An event is already set to this contract")
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

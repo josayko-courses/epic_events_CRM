@@ -17,6 +17,10 @@ class ContractViewset(ModelViewSet):
         """
         Get all contracts
         """
+        if self.request.user.role == "SALES":
+            return Contract.objects.filter(sales_contact=self.request.user)
+        elif self.request.user.role == "SUPPORT":
+            return Contract.objects.filter(event__support_contact=self.request.user)
         return Contract.objects.all()
 
     def perform_create(self, serializer):
@@ -25,7 +29,10 @@ class ContractViewset(ModelViewSet):
         """
         if serializer.validated_data.get("client").is_customer is False:
             raise PermissionDenied("Cannot create a contract with a prospect")
-        serializer.save()
+        else:
+            serializer.save(
+                sales_contact=serializer.validated_data.get("client").sales_contact
+            )
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def perform_update(self, serializer):
