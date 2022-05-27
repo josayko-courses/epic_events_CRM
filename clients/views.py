@@ -33,8 +33,9 @@ class ClientViewset(ModelViewSet):
             customers = Client.objects.filter(sales_contact=self.request.user.id)
             return prospects | customers
         elif self.request.user.role == "SUPPORT":
-            events = Event.objects.filter(support_contact=self.request.user)
-            return [e.contract.client for e in events]
+            return Client.objects.filter(
+                contract__event__support_contact=self.request.user.id
+            )
         return Client.objects.all()
 
     def perform_create(self, serializer):
